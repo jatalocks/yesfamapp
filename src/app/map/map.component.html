@@ -1,0 +1,49 @@
+<!--<iframe src="https://www.google.com/maps/d/embed?mid=1jUniTBetpMPGB_ArI5E06xoGlGABg4v3" allowfullscreen class="h-100 w-100 border-0"></iframe>-->
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)">
+
+    <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
+
+        <agm-info-window>
+            <p><strong>Name:</strong> {{m.name}}
+                <br>
+                <strong>Country:</strong> {{m.country}}
+                <br>
+                <strong>City:</strong> {{m.city}}
+                <br>
+                <strong>Intro:</strong> {{m.intro}}
+            </p>
+        </agm-info-window>
+
+    </agm-marker>
+
+    <!--
+    <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="5000" [fillColor]="'red'" [circleDraggable]="true" [editable]="true">
+    </agm-circle>
+-->
+</agm-map>
+
+<div class="fixed-lock">
+    <div class="card text-dark bg-light">
+        <div class="card-body">
+            <h4 class="card-title">Add Yourself To The Map</h4>
+            <small>Fill the following and click on your location on the map!</small>
+            <hr>
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="name">
+                <small id="helpId" class="form-text text-muted">Name</small>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="city">
+                <small id="helpId" class="form-text text-muted">Country</small>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="country">
+                <small id="helpId" class="form-text text-muted">City</small>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="3" [(ngModel)]="intro"></textarea>
+                <small id="helpId" class="form-text text-muted">Introduction</small>
+            </div>
+        </div>
+    </div>
+</div>

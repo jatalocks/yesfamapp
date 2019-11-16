@@ -1,0 +1,16 @@
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of people">
+            <td>{{item.Name}}</td>
+            <td>{{item.Country}}</td>
+            <td>{{item.City}}</td>
+        </tr>
+    </tbody>
+</table>
