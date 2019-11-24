@@ -39,6 +39,14 @@ export class DataService {
           });
   }
 
+  getCountries() {
+    return this.httpClient.get('./assets/countries.json', {headers: new HttpHeaders().set("Content-Type", "application/json")});
+}
+
+getCities() {
+  return this.httpClient.get('./assets/cities.json', {headers: new HttpHeaders().set("Content-Type", "application/json")});
+}
+
   }
 
 /*

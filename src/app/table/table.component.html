@@ -1,16 +1,70 @@
-<table class="table table-bordered table-striped">
-    <thead class="thead-dark">
-        <tr>
-            <th>Name</th>
-            <th>Country</th>
-            <th>City</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of people">
-            <td>{{item.Name}}</td>
-            <td>{{item.Country}}</td>
-            <td>{{item.City}}</td>
-        </tr>
-    </tbody>
-</table>
+<p-dataView #dv [value]="people" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="Country"
+    [sortField]="sortField" [sortOrder]="sortOrder">
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-g">
+                    <div class="ui-g-6 filter-container">
+                            <div style="position:relative">
+                                <input type="search" pInputText placeholder="Search by country" (keyup)="dv.filter($event.target.value)">
+                            </div>
+                        </div>
+                         <!--
+                <div class="ui-g-12 ui-md-4">
+                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
+                </div>
+                -->
+
+                <div class="ui-g-6" style="text-align:right">
+                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                </div>
+            </div>
+        </div>
+    </p-header>
+    <ng-template let-person pTemplate="listItem">
+        <div class="ui-g-12">
+            <div class="person-details">
+                <div class="row">
+                    <img src="../../assets/countries/{{handleQuotes(person.Country)}}.png" style="width: 4rem; height: 4rem;">
+                    <div class="ui-g">
+                        <div class="ui-g-12">Name: <b>{{handleQuotes(person.Name)}}</b></div>
+                        <div class="ui-g-12">Country: <b>{{handleQuotes(person.Country)}}</b></div>
+                        <div class="ui-g-12">City: <b>{{handleQuotes(person.City)}}</b></div>
+                        <div class="ui-g-12">Intro: <b>{{handleQuotes(person.Intro)}}</b></div>
+                    </div>
+                </div>
+                <!--<button pButton type="button" icon="pi pi-search" (click)="selectPerson($event, person)"></button>-->
+            </div>
+            <hr>
+        </div>
+    </ng-template>
+    <ng-template let-person pTemplate="gridItem">
+        <div style="padding:.5em" class="ui-g-12 ui-md-3">
+            <p-panel [header]="person.Name" [style]="{'text-align':'center'}">
+                <img src="../../assets/countries/{{handleQuotes(person.Country)}}.png" width="60">
+                <div class="person-detail">{{handleQuotes(person.Name)}} - {{handleQuotes(person.Country)}}</div>
+                <hr class="ui-widget-content" style="border-top:0">
+               <!-- <button pButton type="button" icon="pi pi-search" (click)="selectPerson($event, person)" style="margin-top:0"></button>-->
+            </p-panel>
+        </div>
+    </ng-template>
+</p-dataView>
+<!--
+<p-dialog header="Person Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '225px'}"  (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="selectedPerson">
+        <div class="ui-g-12" style="text-align:center">
+            <img src="../../assets/countries/{{handleQuotes(person.Country)}}.png">
+        </div>
+        <div class="ui-g-4">Name: </div>
+        <div class="ui-g-8">{{person.Name | json}}</div>
+
+        <div class="ui-g-4">Country: </div>
+        <div class="ui-g-8">{{person.Country | json}}</div>
+
+        <div class="ui-g-4">City: </div>
+        <div class="ui-g-8">{{person.City | json}}</div>
+
+        <div class="ui-g-4">Intro: </div>
+        <div class="ui-g-8">{{person.Intro | json}}</div>
+    </div>
+</p-dialog>
+-->

@@ -5,5 +5,24 @@ agm-map {
 .fixed-lock {
     position: absolute;
     top: 5rem;
-    left: 2rem;
+    left: 1rem;
+    max-width: 20rem;
+}
+@media only screen and (max-width: 600px) {
+    .fixed-lock {
+        position: sticky;
+        left: 0;
+        bottom: 0 !important;
+
+        width: 50%;
+    }
+    .titletop{
+        display: none;
+    }
+  }
+
+.fixed-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 3.5rem;
 }

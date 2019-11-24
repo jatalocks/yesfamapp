@@ -24,26 +24,32 @@
 
 <div class="fixed-lock">
     <div class="card text-dark bg-light">
-        <div class="card-body">
-            <h4 class="card-title">Add Yourself To The Map</h4>
-            <small>Fill the following and click on your location on the map!</small>
-            <hr>
-            <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="name">
-                <small id="helpId" class="form-text text-muted">Name</small>
+        <div class="m-4 titletop">
+                <h4 class="card-title">Add Yourself To The Map</h4>
+                <small>Fill the following and click on your location on the map!</small>
+        </div>
+
+        <div class="card-body ui-fluid">
+
+            <input type="text" pInputText [(ngModel)]="name" class="w-100 mb-2" placeholder="Name">
+            <div class="mb-2">
+                    <p-autoComplete [(ngModel)]="country" [suggestions]="filteredCountriesSingle" (completeMethod)="filterCountrySingle($event)" [size]="30"
+                    [minLength]="1" [dropdown]="true" field="name" placeholder="Country">
+                    <ng-template let-country pTemplate="item">
+                        <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                            <img src="../../assets/countries/{{country.name.toLowerCase()}}.png" style="width:32px;display:inline-block;margin:5px 0 2px 5px"/>
+                            <div style="font-size:18px;float:right;margin:10px 10px 0 0">{{country.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="city">
-                <small id="helpId" class="form-text text-muted">Country</small>
+            <div class="mb-2">
+                    <p-autoComplete [(ngModel)]="city" [suggestions]="filteredCitiesSingle" (completeMethod)="filterCitySingle($event)" field="name" [size]="30"
+                    placeholder="City" [minLength]="1"></p-autoComplete>
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="country">
-                <small id="helpId" class="form-text text-muted">City</small>
-            </div>
-            <div class="form-group">
-                <textarea class="form-control" rows="3" [(ngModel)]="intro"></textarea>
-                <small id="helpId" class="form-text text-muted">Introduction</small>
-            </div>
+            <textarea pInputTextarea [(ngModel)]="intro" placeholder="Introduction"></textarea>
         </div>
     </div>
 </div>
+
+<button type="submit" name="" id="add" class="btn btn-primary btn-lg fixed-button" btn-lg btn-block (click)="addMarker()">Add Me!</button>
