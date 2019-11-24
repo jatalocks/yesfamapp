@@ -31,22 +31,28 @@ export class MapComponent implements OnInit {
   };
   firstClick: boolean = true;
   name: any;
-  city: Object = {name: ""};
-  country: Object = {name: ""};
+  city: any;
+  country:  Object = {name: ""};
   intro: any;
   triggered: boolean = false;
   added: boolean;
   filteredCountriesSingle: any[];
   filteredCitiesSingle: any[];
+  countries: Object;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.reloadPeople()
+    this.reloadPeople();
+    this.dataService.getCountries().subscribe(countries => {
+      this.countries = countries;
+
+    });
   }
   filterCountrySingle(event) {
     let query = event.query;
     this.dataService.getCountries().subscribe(countries => {
+      
       this.filteredCountriesSingle = this.filterCountry(query, countries);
     });
   }
@@ -86,7 +92,7 @@ export class MapComponent implements OnInit {
 
   reloadPeople() {
     this.dataService.getPeople().subscribe((data: any[]) => {
-      console.log(data);
+      
       this.markers = [];
       data.forEach(person => {
         this.markers.push({
@@ -103,18 +109,18 @@ export class MapComponent implements OnInit {
 
 
   clickedMarker(label: string, index: number) {
-    //console.log(`clicked the marker: ${label || index}`)
+    //
   }
 
   mapClicked($event: AGMMouseEvent) {
-    console.log(this.tempMarker)
+    
     if (this.triggered == false) {
       if (this.firstClick == true) {
         this.tempMarker.lat = $event.coords.lat;
         this.tempMarker.lng = $event.coords.lng;
         this.tempMarker.draggable = true;
         this.tempMarker.name = this.name;
-        this.tempMarker.city = this.city["name"];
+        this.tempMarker.city = this.city;
         this.tempMarker.country = this.country["name"];
         this.tempMarker.intro = this.intro;
         this.firstClick = false;
@@ -127,7 +133,7 @@ export class MapComponent implements OnInit {
         this.markers[this.markers.length - 1].lng = $event.coords.lng;
         this.tempMarker.draggable = true;
         this.tempMarker.name = this.name;
-        this.tempMarker.city = this.city["name"];
+        this.tempMarker.city = this.city;
         this.tempMarker.country = this.country["name"];
         this.tempMarker.intro = this.intro;
       }
@@ -138,8 +144,9 @@ export class MapComponent implements OnInit {
   }
 
   addMarker() {
-    if (this.name && this.country && this.intro && this.city) {
-      this.dataService.addPerson(this.name, this.country["name"], this.city["name"], this.intro, this.tempMarker.lat, this.tempMarker.lng)
+    
+    if ((this.name != undefined) && (this.country["name"] != undefined) && (this.intro != undefined) && (this.city != undefined)) {
+      this.dataService.addPerson(this.name, this.country["name"], this.city, this.intro, this.tempMarker.lat, this.tempMarker.lng)
       this.triggered = true;
       Swal.fire({ title: 'Success', iconUrl: 'success' });
     }
@@ -150,7 +157,7 @@ export class MapComponent implements OnInit {
 
 
   markerDragEnd(m: marker, $event: MouseEvent) {
-    //console.log('dragEnd', m, $event);
+    //
   }
 
 

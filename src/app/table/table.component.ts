@@ -29,7 +29,7 @@ export class TableComponent implements OnInit {
     this.dataService.getPeople().subscribe((data: Person[])=>{
       
       this.people = data;
-      console.log(this.people);
+      
     });
 
     this.sortOptions = [
