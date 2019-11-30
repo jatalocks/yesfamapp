@@ -15,7 +15,7 @@ export class DataService {
     return this.httpClient.get(this.REST_API_SERVER, {headers: new HttpHeaders().set("x-apikey", "5dd0190264e7774913b6ed55")});    
   }
 
-  addPerson(name,country,city,intro,lat,lng)
+  addPerson(name,country,city,intro,lat,lng,social)
   {
     this.httpClient.post(this.REST_API_SERVER,
       {
@@ -23,7 +23,8 @@ export class DataService {
         "Country":country,
         "City":city,"Intro":intro,
         "lat":lat,
-        "lng":lng
+        "lng":lng,
+        "Social": social
       },{
         headers: new HttpHeaders().set("x-apikey", "5dd0190264e7774913b6ed55")
       }).subscribe(

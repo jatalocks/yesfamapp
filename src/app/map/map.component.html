@@ -11,6 +11,8 @@
                 <strong>City:</strong> {{m.city}}
                 <br>
                 <strong>Intro:</strong> {{m.intro}}
+                <br>
+                <strong>Contact:</strong> {{m.social}}
             </p>
         </agm-info-window>
 
@@ -23,7 +25,7 @@
 </agm-map>
 
 <div class="fixed-lock">
-    <div class="card text-dark bg-light">
+    <div class="card text-dark bg-light border border-primary">
         <div class="m-4 titletop">
                 <h4 class="card-title">Add Yourself To The Map</h4>
                 <small>Fill the following and click on your location on the map!</small>
@@ -34,7 +36,7 @@
             <input type="text" pInputText [(ngModel)]="name" class="w-100 mb-2" placeholder="Name">
             <div class="mb-2">
                     <p-autoComplete [(ngModel)]="country" [suggestions]="filteredCountriesSingle" (completeMethod)="filterCountrySingle($event)" [size]="30"
-                    [minLength]="1" [dropdown]="true" field="name" placeholder="Country">
+                    [minLength]="1" [dropdown]="true" field="name" placeholder="Country (Must Choose)">
                     <ng-template let-country pTemplate="item">
                         <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
                             <img src="../../assets/countries/{{country.name.toLowerCase()}}.png" style="width:32px;display:inline-block;margin:5px 0 2px 5px"/>
@@ -50,9 +52,15 @@
             </div>
             -->
             <input type="text" pInputText [(ngModel)]="city" class="w-100 mb-2" placeholder="City">
-            <textarea pInputTextarea [(ngModel)]="intro" placeholder="Introduction"></textarea>
+            <div class="ui-inputgroup mb-2">
+                <span class="ui-inputgroup-addon">
+                    <fa-icon [icon]="faThumbsUp"></fa-icon>
+                </span>
+                <input type="text" pInputText [(ngModel)]="social" class="w-100" placeholder="Social / Contact / Phone">        
+            </div>
+            <textarea pInputTextarea [(ngModel)]="intro" placeholder="Introduction" id="intro"></textarea>
         </div>
+        <button type="submit" id="add" class="btn btn-primary btn-lg fixed-button" btn-lg btn-block (click)="addMarker()">Add Me!</button>
     </div>
 </div>
 
-<button type="submit" name="" id="add" class="btn btn-primary btn-lg fixed-button" btn-lg btn-block (click)="addMarker()">Add Me!</button>

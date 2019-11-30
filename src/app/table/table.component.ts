@@ -71,6 +71,7 @@ interface Person{
   Country: string;
   City: string;
   Intro: string;
+  Social: string;
 }
 /*
     cars: Car[];

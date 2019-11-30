@@ -30,6 +30,7 @@
                         <div class="ui-g-12">Country: <b>{{handleQuotes(person.Country)}}</b></div>
                         <div class="ui-g-12">City: <b>{{handleQuotes(person.City)}}</b></div>
                         <div class="ui-g-12">Intro: <b>{{handleQuotes(person.Intro)}}</b></div>
+                        <div class="ui-g-12">Social: <b>{{handleQuotes(person.Social)}}</b></div>
                     </div>
                 </div>
                 <!--<button pButton type="button" icon="pi pi-search" (click)="selectPerson($event, person)"></button>-->
@@ -41,7 +42,7 @@
         <div style="padding:.5em" class="ui-g-12 ui-md-3">
             <p-panel [header]="person.Name" [style]="{'text-align':'center'}">
                 <img src="../../assets/countries/{{handleQuotes(person.Country)}}.png" width="60">
-                <div class="person-detail">{{handleQuotes(person.Name)}} - {{handleQuotes(person.Country)}}</div>
+                <div class="person-detail">{{handleQuotes(person.Name)}} - {{handleQuotes(person.Country)}} <br> {{handleQuotes(person.Social)}}</div>
                 <hr class="ui-widget-content" style="border-top:0">
                <!-- <button pButton type="button" icon="pi pi-search" (click)="selectPerson($event, person)" style="margin-top:0"></button>-->
             </p-panel>

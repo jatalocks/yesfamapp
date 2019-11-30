@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MouseEvent as AGMMouseEvent } from '@agm/core';
 import { DataService } from '../data.service';
 import Swal from 'sweetalert2';
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -9,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class MapComponent implements OnInit {
 
+  faThumbsUp = faThumbsUp;
   /*
   markers: marker[] = [
     {
@@ -27,10 +29,12 @@ export class MapComponent implements OnInit {
     country: null,
     draggable: null,
     intro: null,
-    iconUrl: null
+    iconUrl: null,
+    social: null
   };
   firstClick: boolean = true;
   name: any;
+  social: any;
   city: any;
   country:  Object = {name: ""};
   intro: any;
@@ -96,7 +100,7 @@ export class MapComponent implements OnInit {
       this.markers = [];
       data.forEach(person => {
         this.markers.push({
-          lat: person['lat'], lng: person['lng'], draggable: false, name: person["Name"], city: person["City"], country: person["Country"], intro: person["Intro"], iconUrl: 'https://icon-library.net/images/android-marker-icon/android-marker-icon-4.jpg'
+          lat: person['lat'], lng: person['lng'], draggable: false, name: person["Name"], city: person["City"], country: person["Country"], intro: person["Intro"],social: person["Social"], iconUrl: 'https://icon-library.net/images/android-marker-icon/android-marker-icon-4.jpg'
 
         })
         //this.markers[this.markers.length-1].icon("https://icon-library.net/images/android-marker-icon/android-marker-icon-4.jpg");
@@ -123,6 +127,7 @@ export class MapComponent implements OnInit {
         this.tempMarker.city = this.city;
         this.tempMarker.country = this.country["name"];
         this.tempMarker.intro = this.intro;
+        this.tempMarker.social = this.social;
         this.firstClick = false;
         this.markers.push(this.tempMarker);
       }
@@ -136,6 +141,7 @@ export class MapComponent implements OnInit {
         this.tempMarker.city = this.city;
         this.tempMarker.country = this.country["name"];
         this.tempMarker.intro = this.intro;
+        this.tempMarker.social = this.social;
       }
     }
     else {
@@ -145,8 +151,8 @@ export class MapComponent implements OnInit {
 
   addMarker() {
     
-    if ((this.name != undefined) && (this.country["name"] != undefined) && (this.intro != undefined) && (this.city != undefined)) {
-      this.dataService.addPerson(this.name, this.country["name"], this.city, this.intro, this.tempMarker.lat, this.tempMarker.lng)
+    if ((this.name != undefined) && (this.country["name"] != undefined) && (this.intro != undefined) && (this.city != undefined) && (this.social != undefined)) {
+      this.dataService.addPerson(this.name, this.country["name"], this.city, this.intro, this.tempMarker.lat, this.tempMarker.lng,this.social)
       this.triggered = true;
       Swal.fire({ title: 'Success', iconUrl: 'success' });
     }
@@ -174,4 +180,5 @@ interface marker {
   country: string;
   intro: string;
   iconUrl: string;
+  social: string;
 }

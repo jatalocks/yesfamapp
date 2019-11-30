@@ -19,10 +19,29 @@ agm-map {
     .titletop{
         display: none;
     }
+    .fixed-button {
+        position: fixed;
+        bottom: 0.5rem;
+        right: 3.5rem;
+    }    
+    
+    #intro{
+        max-height: 5em;
+        height: 5em !important;
+    }
+  }
+  @media only screen and (max-height: 600px) {
+
+    .fixed-button {
+        position: fixed;
+        bottom: 0.5rem;
+        right: 3.5rem;
+    }    
+    
+
   }
 
-.fixed-button {
-    position: absolute;
-    bottom: 1rem;
-    right: 3.5rem;
+#intro{
+    max-height: 15em;
+    height: 10em;
 }
